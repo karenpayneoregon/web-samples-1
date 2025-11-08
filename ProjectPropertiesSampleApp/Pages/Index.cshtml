@@ -1,10 +1,11 @@
 ﻿@page
+@using CommonLibrary
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="fs-4">@ProjectInformation.GetTitle()</h1>
+    <p>Learn how to read properties from the project file <code>*.csproj</code> and shown in the About page.</p>
 </div>
