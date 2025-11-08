@@ -32,7 +32,7 @@ public static class ProjectInformation
     /// </summary>
     /// <returns>
     /// The value of the &lt;Title&gt; element if found; otherwise
-    /// "No title information found."
+    /// No title information found.
     /// </returns>
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static string GetTitle()
@@ -90,122 +90,21 @@ public static class ProjectInformation
         var asm = Assembly.GetCallingAssembly();
         return asm.GetName().Version ?? new Version(1, 0, 0, 0);
     }
-
+    
     /// <summary>
-    /// Represents details about the caller of a method, including assembly information,
-    /// target framework, type and method names, file path, and line number.
+    /// Attempts to locate the .csproj file associated with the specified assembly by traversing
+    /// upwards from the assembly's directory.
     /// </summary>
-    public readonly record struct CallerDetails(
-        string? AssemblyName,
-        string? AssemblyVersion,
-        string? TargetFramework,
-        string? TypeName,
-        string? MethodName,
-        string? FilePath,
-        int LineNumber);
-
-    /// <summary>
-    /// Retrieves the copyright information associated with the calling assembly.
-    /// </summary>
-    /// <param name="caller">
-    /// When this method returns, contains details about the caller, including the assembly name, 
-    /// version, target framework, type name, method name, file path, and line number.
-    /// </param>
-    /// <param name="memberName">
-    /// The name of the member that invoked this method. This parameter is optional and is automatically 
-    /// populated by the compiler if not explicitly provided.
-    /// </param>
-    /// <param name="filePath">
-    /// The file path of the source code that invoked this method. This parameter is optional and is 
-    /// automatically populated by the compiler if not explicitly provided.
-    /// </param>
-    /// <param name="lineNumber">
-    /// The line number in the source code file that invoked this method. This parameter is optional 
-    /// and is automatically populated by the compiler if not explicitly provided.
+    /// <param name="assembly">
+    /// The <see cref="Assembly"/> for which to locate the corresponding .csproj file.
     /// </param>
     /// <returns>
-    /// A <see cref="string"/> containing the copyright information, or "No copyright information found" 
-    /// if the copyright is not specified in the assembly metadata.
+    /// The full path to the .csproj file if found; otherwise, <see langword="null"/>.
     /// </returns>
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    public static string GetCopyright(out CallerDetails caller, [CallerMemberName] string? memberName = null,
-        [CallerFilePath] string? filePath = null, [CallerLineNumber] int lineNumber = 0)
-    {
-        caller = BuildCallerDetails(memberName, filePath, lineNumber);
-        return GetCopyright();
-    }
-
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    public static string GetCompany(
-        out CallerDetails caller,
-        [CallerMemberName] string? memberName = null,
-        [CallerFilePath] string? filePath = null,
-        [CallerLineNumber] int lineNumber = 0)
-    {
-        caller = BuildCallerDetails(memberName, filePath, lineNumber);
-        return GetCompany();
-    }
-
-
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    public static string GetProduct(
-        out CallerDetails caller,
-        [CallerMemberName] string? memberName = null,
-        [CallerFilePath] string? filePath = null,
-        [CallerLineNumber] int lineNumber = 0)
-    {
-        caller = BuildCallerDetails(memberName, filePath, lineNumber);
-        return GetProduct();
-    }
-
-
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    private static CallerDetails BuildCallerDetails(string? memberName, string? filePath, int lineNumber)
-    {
-        var callingAsm = Assembly.GetCallingAssembly();
-        string? typeName = null;
-
-        try
-        {
-            // Skip this helper frame; capture the immediate external frame.
-            var st = new StackTrace(skipFrames: 1, fNeedFileInfo: false);
-            var frame = st.GetFrame(0);
-            typeName = frame?.GetMethod()?.DeclaringType?.FullName;
-        }
-        catch
-        {
-            // Best-effort; leave typeName null if anything goes sideways.
-        }
-
-        var asmName = callingAsm.GetName();
-        var framework = callingAsm.GetCustomAttribute<TargetFrameworkAttribute>()?.FrameworkName;
-
-        return new CallerDetails(
-            AssemblyName: asmName?.Name,
-            AssemblyVersion: asmName?.Version?.ToString(),
-            TargetFramework: framework,
-            TypeName: typeName,
-            MethodName: memberName,
-            FilePath: filePath,
-            LineNumber: lineNumber);
-    }
-
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    public static Version GetVersion(
-        out CallerDetails caller,
-        [CallerMemberName] string? memberName = null,
-        [CallerFilePath] string? filePath = null,
-        [CallerLineNumber] int lineNumber = 0)
-    {
-        caller = BuildCallerDetails(memberName, filePath, lineNumber);
-        return GetVersion();
-    }
-
-
-    /// <summary>
-    /// Attempts to locate a .csproj file for the specified assembly by walking up
-    /// from the assembly's directory.
-    /// </summary>
+    /// <remarks>
+    /// This method searches for a .csproj file in the directory of the specified assembly and 
+    /// continues searching in parent directories until a match is found or the root directory is reached.
+    /// </remarks>
     private static string? TryFindProjectFile(Assembly assembly)
     {
         var location = assembly.Location;
@@ -274,20 +173,4 @@ public static class ProjectInformation
             ? "No title information found."
             : title;
     }
-
-    /// <summary>
-    /// Gets the Title from the calling project's .csproj file and captures caller details.
-    /// </summary>
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    public static string GetTitle(
-        out CallerDetails caller,
-        [CallerMemberName] string? memberName = null,
-        [CallerFilePath] string? filePath = null,
-        [CallerLineNumber] int lineNumber = 0)
-    {
-        caller = BuildCallerDetails(memberName, filePath, lineNumber);
-        return GetTitle();
-    }
-
-
 }

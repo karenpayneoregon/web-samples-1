@@ -17,12 +17,12 @@ namespace ProjectPropertiesSampleApp.Pages
             Copyright = GetCopyright(),
             ProjectName = GetProduct(),
             Company = GetCompany(),
-            Version = GetVersion()
+            Version = GetVersion(),
+            Title = GetTitle()
         };
 
         public void OnGet()
         {
-     
         }
     }
 }
