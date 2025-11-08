@@ -3,12 +3,15 @@
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
 		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
+		<ImplicitUsings>enable</ImplicitUsings>		
 		<Copyright>© $([System.DateTime]::Now.Year)</Copyright>
 		<Company>NorthWind Inc</Company>
 		<Product>Code sample</Product>
 		<AssemblyVersion>2.0.1.2</AssemblyVersion>
 		<Title>About this project</Title>
+		<Description>
+			Learn how to read properties from the project file &lt;strong&gt;.csproj&lt;/strong&gt; and shown in the About page.
+		</Description>	
 	</PropertyGroup>
 
 	<ItemGroup>

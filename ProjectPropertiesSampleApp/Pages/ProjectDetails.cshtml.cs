@@ -18,7 +18,8 @@ namespace ProjectPropertiesSampleApp.Pages
             ProjectName = GetProduct(),
             Company = GetCompany(),
             Version = GetVersion(),
-            Title = GetTitle()
+            Title = GetTitle(),
+            ProjectDescription = GetProjectDescription()
         };
 
         public void OnGet()

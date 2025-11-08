@@ -7,5 +7,6 @@
 
 <div class="text-center">
     <h1 class="fs-4">@ProjectInformation.GetTitle()</h1>
-    <p>Learn how to read properties from the project file <code>*.csproj</code> and shown in the About page.</p>
+    @* for strong tag *@
+    <p>@Html.Raw(Model.Description)</p>
 </div>

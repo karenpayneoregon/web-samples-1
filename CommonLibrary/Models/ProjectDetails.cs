@@ -9,6 +9,7 @@ public class ProjectDetails
 {
     public string Copyright { get; set; }
     public string ProjectName { get; set; }
+    public string ProjectDescription { get; set; }
     public string Company { get; set; }
     public Version Version { get; set; }
     public string Title { get; set; }

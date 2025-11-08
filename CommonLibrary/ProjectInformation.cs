@@ -1,7 +1,5 @@
-﻿using System.Diagnostics;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Runtime.Versioning;
 using System.Xml.Linq;
 
 namespace CommonLibrary;
@@ -74,6 +72,25 @@ public static class ProjectInformation
         var asm = Assembly.GetCallingAssembly();
         var attr = asm.GetCustomAttribute<AssemblyProductAttribute>();
         return attr?.Product ?? "No product information found.";
+    }
+
+    /// <summary>
+    /// Gets the Description from the calling project's .csproj file.
+    /// </summary>
+    /// <returns>
+    /// The value of the &lt;Description&gt; element if found; otherwise
+    /// "No description information found."
+    /// </returns>
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static string GetProjectDescription()
+    {
+        var asm = Assembly.GetCallingAssembly();
+        var projectFile = TryFindProjectFile(asm);
+
+        if (projectFile is null)
+            return "No description information found.";
+
+        return ReadDescriptionFromProjectFile(projectFile);
     }
 
     /// <summary>
@@ -173,4 +190,48 @@ public static class ProjectInformation
             ? "No title information found."
             : title;
     }
+
+    /// <summary>
+    /// Reads the <c>&lt;Description&gt;</c> property from a specified .csproj file.
+    /// </summary>
+    /// <param name="projectFilePath">The absolute path to the .csproj file.</param>
+    /// <returns>
+    /// A <see cref="string"/> containing the value of the <c>&lt;Description&gt;</c> property if found; 
+    /// otherwise, "No description information found."
+    /// </returns>
+    /// <remarks>
+    /// This method supports both SDK-style projects (without an MSBuild namespace) and 
+    /// old-style .csproj files with the MSBuild namespace.
+    /// </remarks>
+    private static string ReadDescriptionFromProjectFile(string projectFilePath)
+    {
+        if (!File.Exists(projectFilePath))
+            return "No description information found.";
+
+        var doc = XDocument.Load(projectFilePath);
+
+        // SDK-style projects (no MSBuild namespace)
+        var description = doc
+            .Descendants("PropertyGroup")
+            .Elements("Description")
+            .Select(e => e.Value)
+            .FirstOrDefault();
+
+        if (!string.IsNullOrWhiteSpace(description))
+            return description;
+
+        // Old-style .csproj with MSBuild namespace
+        XNamespace msbuild = "http://schemas.microsoft.com/developer/msbuild/2003";
+
+        description = doc
+            .Descendants(msbuild + "PropertyGroup")
+            .Elements(msbuild + "Description")
+            .Select(e => e.Value)
+            .FirstOrDefault();
+
+        return string.IsNullOrWhiteSpace(description)
+            ? "No description information found."
+            : description;
+    }
+
 }

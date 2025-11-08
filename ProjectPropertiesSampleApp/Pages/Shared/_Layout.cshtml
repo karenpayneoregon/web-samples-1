@@ -44,8 +44,8 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            @* Get copyright from CommonLibrary *@
-            @ProjectInformation.GetCopyright() | ProjectPropertiesSampleApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            @* Get copyright and company name from CommonLibrary *@
+            @ProjectInformation.GetCopyright() | @ProjectInformation.GetCompany() - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 
