@@ -5,12 +5,10 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
-	<ItemGroup>
-		<!-- ReSharper disable once VulnerablePackage -->
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
-	</ItemGroup>
 
 	<ItemGroup>
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="Spectre.Console.Json" Version="0.53.0" />
+		<PackageReference Include="Spectre.Console" Version="0.53.0" />
 	</ItemGroup>
+
 </Project>

@@ -1,0 +1,25 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+
+    <div class="alert alert-primary" role="alert">
+        <h1 class="fs-4">Code sample</h1>
+    </div>
+
+    <div class="card mt-4 mx-auto shadow" style="width: 35rem;">
+        <div class="card-body">
+            <h2 class="card-title">About</h2>
+            <p class="card-text">Example to display an item as formatted JSON in the console.</p>
+
+            <a asp-page="./ViewContact"
+               asp-route-id="@Model.ContactId"
+               title="Details" class="me-2 text-decoration-none btn btn-primary">
+                <i class="bi bi-info-circle"></i> View random contact
+            </a>
+        </div>
+    </div>
+</div>

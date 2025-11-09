@@ -14,6 +14,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		readme.md = readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind2024LocalLibrary", "NorthWind2024LocalLibrary\NorthWind2024LocalLibrary.csproj", "{04FE4A8C-B9CF-2D0A-824C-A03ED9F098C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewAsJsonApp", "ViewAsJsonApp\ViewAsJsonApp.csproj", "{47405F9A-0E5A-4330-98C0-FBF86A420F9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectreConsoleJsonLibrary", "SpectreConsoleJsonLibrary\SpectreConsoleJsonLibrary.csproj", "{91DD5C6B-1B27-45A3-A87B-09357D695ADD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,12 +34,26 @@ Global
 		{D0B1A6CB-7E76-4C7A-95F6-129B514BEA89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0B1A6CB-7E76-4C7A-95F6-129B514BEA89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0B1A6CB-7E76-4C7A-95F6-129B514BEA89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04FE4A8C-B9CF-2D0A-824C-A03ED9F098C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04FE4A8C-B9CF-2D0A-824C-A03ED9F098C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04FE4A8C-B9CF-2D0A-824C-A03ED9F098C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04FE4A8C-B9CF-2D0A-824C-A03ED9F098C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47405F9A-0E5A-4330-98C0-FBF86A420F9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47405F9A-0E5A-4330-98C0-FBF86A420F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47405F9A-0E5A-4330-98C0-FBF86A420F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47405F9A-0E5A-4330-98C0-FBF86A420F9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91DD5C6B-1B27-45A3-A87B-09357D695ADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91DD5C6B-1B27-45A3-A87B-09357D695ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91DD5C6B-1B27-45A3-A87B-09357D695ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91DD5C6B-1B27-45A3-A87B-09357D695ADD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2995E2B2-6181-0558-93D2-D9EC05F709E2} = {7A4C05E0-4FF7-B8EC-2124-E708496D3B03}
+		{04FE4A8C-B9CF-2D0A-824C-A03ED9F098C7} = {7A4C05E0-4FF7-B8EC-2124-E708496D3B03}
+		{91DD5C6B-1B27-45A3-A87B-09357D695ADD} = {7A4C05E0-4FF7-B8EC-2124-E708496D3B03}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {76DF44EC-C7EB-46D4-BB59-BD349D943978}

@@ -1,6 +1,11 @@
 
+## PascalCaseDisplayMetadataProvider class
 
-## ProjectInformation
+| Method | Description |
+| :-- | :-- |
+| `CreateDisplayMetadata` | Creates and customizes the display metadata for a given model property |
+| `SplitPascalCase`| Splits the display name of the property to PascalCase format |
+## ProjectInformation class
 
 | Method | Description |
 | :-- | :-- |
