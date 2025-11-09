@@ -16,30 +16,29 @@ using Color = Spectre.Console.Color;
 
 namespace ViewAsJsonApp.Pages;
 
-public class ViewContactModel(
-    Context context, 
-    IOptions<JsonOptions> jsonOptions) : PageModel
+public class ViewContactModel(Context context, IOptions<JsonOptions> jsonOptions) : PageModel
 {
 
-public Contact Contact { get; set; } = null!;
+    public Contact Contact { get; set; } = null!;
 
-public async Task<IActionResult> OnGetAsync(int id)
-{
-
-    var contact = await ContactOperations.GetByIdentifier(context, id);
-
-    if (contact is not null)
+    public async Task<IActionResult> OnGetAsync(int id)
     {
-        Contact = contact;
 
-        var json = JsonSerializer.Serialize(Contact, JsonSerializerOptions());
-        
-        Utilities.DisplayJsonConsole(json, "Contact");
-        return Page();
+        var contact = await ContactOperations.GetByIdentifier(context, id);
+
+        if (contact is not null)
+        {
+            Contact = contact;
+
+            var json = JsonSerializer.Serialize(Contact, JsonSerializerOptions());
+
+            Utilities.DisplayJsonConsole(json, "Contact");
+            
+            return Page();
+        }
+
+        return NotFound();
     }
-
-    return NotFound();
-}
 
     /// <summary>
     /// Provides custom JSON serialization options for serializing objects.
