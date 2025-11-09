@@ -1,22 +1,17 @@
-﻿using System.Drawing;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using NorthWind2024LocalLibrary.Classes;
 using NorthWind2024LocalLibrary.Data;
 using NorthWind2024LocalLibrary.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Spectre.Console;
 using JsonOptions = Microsoft.AspNetCore.Http.Json.JsonOptions;
-using Spectre.Console.Json;
 using SpectreConsoleJsonLibrary;
-using Color = Spectre.Console.Color;
 
 namespace ViewAsJsonApp.Pages;
 
-public class ViewContactModel(Context context, IOptions<JsonOptions> jsonOptions) : PageModel
+public class ViewContactModel(Context context, IOptions<JsonOptions> jsonOptions,     IWebHostEnvironment env) : PageModel
 {
 
     public Contact Contact { get; set; } = null!;
@@ -30,10 +25,13 @@ public class ViewContactModel(Context context, IOptions<JsonOptions> jsonOptions
         {
             Contact = contact;
 
-            var json = JsonSerializer.Serialize(Contact, JsonSerializerOptions());
+            if (env.IsDevelopment())
+            {
+                var json = JsonSerializer.Serialize(Contact, JsonSerializerOptions());
 
-            Utilities.DisplayJsonConsole(json, "Contact");
-            
+                Utilities.DisplayJsonConsole(json, "Contact");
+            }
+
             return Page();
         }
 
