@@ -11,7 +11,7 @@ using SpectreConsoleJsonLibrary;
 
 namespace ViewAsJsonApp.Pages;
 
-public class ViewContactModel(Context context, IOptions<JsonOptions> jsonOptions,     IWebHostEnvironment env) : PageModel
+public class ViewContactModel(Context context, IOptions<JsonOptions> jsonOptions, IWebHostEnvironment env) : PageModel
 {
 
     public Contact Contact { get; set; } = null!;
